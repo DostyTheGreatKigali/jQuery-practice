@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <div>
+    <button id="submit">Create radio button</button>
+    </div>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+
+    <script>
+        let team = [
+            { 
+                name: "aaron",
+                position: "developer",
+                salary: 50000
+            },
+            {
+                name: "beth",
+                position: "ui designer",
+                salary: 20000
+            },
+            {
+                name: "cara",
+                position: "developer",
+                salary: 50000
+            },
+            {
+                name: "daniel",
+                position: "content manager",
+                salary: 20000
+            },
+            {
+                name: "ella",
+                position: "cto",
+                salary: 70000
+            },
+            {
+                name: "fin",
+                position: "backend engineer",
+                salary: 60000
+            },
+            {
+                name: "george",
+                position: "developer",
+                salary: 40000
+            },
+
+        ]
+        var radios = team.filter(member => member.position == "developer")
+        console.log(radios)
+
+        function displayRadioButtonsDynamically() {
+            for (var value of radios) {
+                $('#container')
+                    .append(`<input type="radio" id="${value.name}" name="contact" value="${value.salary}">`)
+                    .append(`<label for="${value.name}">${value.name}</label></div>`)
+                    .append(`<br>`);
+        }
+
+        }
+
+        $(document).ready(function() {
+            displayRadioButtonsDynamically()
+            // var radios = team.filter(member => member.position == "developer")
+            //     console.log(radios)
+            // $('#submit').click(function() {
+            //     // var radios = ['Email', 'Phone', 'Mail'];
+            //     // var radios = team.filter(member => member.position == "developer")
+            //     // console.log(radios)
+            //     for (var value of radios) {
+            //     $('#container')
+            //         .append(`<input type="radio" id="${value.name}" name="contact" value="${value.salary}">`)
+            //         .append(`<label for="${value.name}">${value.position}</label></div>`)
+            //         .append(`<br>`);
+            //     }
+            // })
+        });
+    </script>
+
+</body>
+</html>
+
