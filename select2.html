@@ -1,0 +1,204 @@
+<!-- https://www.nicesnippets.com/blog/select2-dropdown-with-validation-example-bootstrap-4 -->
+<html>
+
+<head>
+
+    <title>Select2 DropDown With Validation Example Bootstrap 4</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.min.css" />
+
+<body>
+
+<style type="text/css">
+
+    #select2Form .form-control-feedback {
+
+        z-index: 100;
+
+    }
+
+    .help-block{
+
+        color: red;
+
+    }
+
+    body{
+
+        background-color: #c0ed4d;
+
+    }
+
+</style>
+
+<div class="continer">
+
+    <div class="row mt-5 pt-5">
+
+        <div class="col-md-5 text-center offset-md-3 mt-5 pt-5">
+
+            <form id="select2Form" method="post" class="form-horizontal">
+
+                <label><h3>Favorite color</h3></label>
+
+                <select name="colors" class="form-control select2-select" multiple data-placeholder="Choose 2-4 colors">
+
+                    <option value="black">Black</option>
+
+                    <option value="blue">Blue</option>
+
+                    <option value="green">Green</option>
+
+                    <option value="orange">Orange</option>
+
+                    <option value="red">Red</option>
+
+                    <option value="yellow">Yellow</option>
+
+                    <option value="white">White</option>
+
+                </select>
+
+                <div class="form-group mt-3">
+
+                    <button type="submit" class="btn btn-success">Validate</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.js"></script>
+
+<script src="https://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+
+<script>
+
+$(document).ready(function() {
+
+    $('#select2Form')
+
+        .find('[name="colors"]')
+
+            .select2()
+
+            // Revalidate the color when it is changed
+
+            .change(function(e) {
+
+                $('#select2Form').bootstrapValidator('revalidateField', 'colors');
+
+            })
+
+            .end()
+
+        .find('[name="colors-tags"]')
+
+            .select2({
+
+                // Specify tags
+
+                tags: ['Black', 'Blue', 'Green', 'Orange', 'Red', 'Yellow', 'White']
+
+            })
+
+            // Revalidate the color when it is changed
+
+            .change(function(e) {
+
+                $('#select2Form').bootstrapValidator('revalidateField', 'colors-tags');
+
+            })
+
+            .end()
+
+        .bootstrapValidator({
+
+            excluded: ':disabled',
+
+            feedbackIcons: {
+
+                valid: 'glyphicon glyphicon-ok',
+
+                invalid: 'glyphicon glyphicon-remove',
+
+                validating: 'glyphicon glyphicon-refresh'
+
+            },
+
+            fields: {
+
+                colors: {
+
+                    validators: {
+
+                        callback: {
+
+                            message: 'Please choose 2-4 color you like most',
+
+                            callback: function(value, validator) {
+
+                                // Get the selected options
+
+                                var options = validator.getFieldElements('colors').val();
+
+                                return (options != null && options.length >= 2 && options.length <= 4);
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                'colors-tags': {
+
+                    validators: {
+
+                        callback: {
+
+                            message: 'Please choose 2-4 color you like most',
+
+                            callback: function(value, validator) {
+
+                                // Get the selected options
+
+                                var options  = validator.getFieldElements('colors-tags').val(),
+
+                                    options2 = options.split(',');
+
+                                return (options2 !== null && options2.length >= 2 && options2.length <= 4);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+});
+
+</script>
+
+</html>
